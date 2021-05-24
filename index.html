@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      crossorigin
+      src="https://unpkg.com/react@17/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>İlk Element</title>
+    <style>
+        .card{
+            border:1px solid red;
+            margin: 15px;
+            padding: 10px;
+        }
+        .online{
+            color:green;
+
+        }
+        .offline{
+            color:grey;
+        }
+        .busy{
+            color:red;
+        }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      // const element =React.createElement('h1',{},'Hello React');
+      //    const ad="Ekrem";
+      //     const element =<h >Merhaba {new Date().toLocaleTimeString()}</h>;
+
+      // function MyComponent(params) {
+      //     return(<div><h1>Ekrem</h1><h3>Çevrimiçi</h3></div>)
+      // }
+      class Kisi extends React.Component {
+        state = {
+          name: "Ekro",
+          status: "offline",
+        };
+        clickHandler=()=>{
+            this.setState({name:'Merhaba'})
+        }
+        changeHandler = (e) =>{
+            console.log(e.target.value)
+           this.setState({
+            status: e.target.value
+           });
+        }
+        changeNameHandler=(e)=>{
+           
+           this.setState({
+            name: e.target.value
+           });
+        }
+        render() {
+          const { name, status } = this.state;
+          return (
+            <div className="card">
+              <h1>{name}</h1>
+              <h3 className={status}>{status} </h3>
+              <button onClick={this.clickHandler}>Test</button>
+              <select name="state" id="state" onChange={this.changeHandler} value={status}>
+                <option value="online">Online</option>
+                <option value="offline">Offline</option>
+                <option value="busy">Busy</option>
+                </select><br></br>
+                <input type="text" name="name" onChange={this.changeNameHandler} />
+            </div>
+          );
+        }
+      }
+
+      ReactDOM.render(<Kisi />, document.getElementById("root"));
+    </script>
+  </body>
+</html>
